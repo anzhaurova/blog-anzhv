@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PostController::class, 'index']);
+Route::resource('admin/posts', PostController::class);
 
-//Route::get('/dashboard', function () {
-//    return view('dashboard');
-//})->middleware(['auth'])->name('dashboard');
+//Route::get('/', [PostController::class, 'index']);
+//Route::resource('posts', PostController::class);
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+
+require __DIR__.'/auth.php';
+
+//Route::get('/', [PostController::class, 'index'])->name('home');
+//Route::get('/posts/feed', [PostFeedController::class, 'index'])->name('posts.feed');
+//Route::resource('posts', PostController::class)->only('show');
+//Route::resource('users', UserController::class)->only('show');
 //
-//require __DIR__.'/auth.php';
+//Route::get('newsletter-subscriptions/unsubscribe', [NewsletterSubscriptionController::class, 'unsubscribe'])->name('newsletter-subscriptions.unsubscribe');
